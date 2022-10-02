@@ -1,1 +1,6 @@
-export * from './AuthComponent'
+export * from './Buttons'
+export * from './Icons'
+export * from './Inputs'
+export * from './Box'
+export * from './Auth'
+export * from './SnackBar'

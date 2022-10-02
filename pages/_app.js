@@ -1,6 +1,8 @@
 import React from 'react'
 import Head from 'next/head';
+import { SessionProvider } from 'next-auth/react'
 import { ThemeProvider } from '@mui/material/styles';
+import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider } from '@emotion/react';
 import {
@@ -19,7 +21,11 @@ const MyApp = ({ Component, pageProps }) => {
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Component {...pageProps} />
+        <SessionProvider session={pageProps.session}>
+          <Container>
+            <Component {...pageProps} />
+          </Container>
+        </SessionProvider>
       </ThemeProvider>
     </CacheProvider>
   );

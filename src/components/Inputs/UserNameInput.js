@@ -2,10 +2,11 @@ import React from "react"
 
 import { OutlineBaseInput } from "./OutlineBaseInput"
 
-const EmailInput = (props) => (
+const UserNameInput = (props) => (
     <OutlineBaseInput
-        label="Email"
+        label="Username"
+        {...props}
     />
 )
 
-export { EmailInput }
+export { UserNameInput }

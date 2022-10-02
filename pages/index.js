@@ -1,13 +1,15 @@
 import * as React from 'react';
-import Container from '@mui/material/Container';
-import { AuthComponent } from '../src/components';
+import { PageBox } from '../src/components';
+import { ProtectedComponent } from '../src/components/Auth';
 
 const Index = () => {
   return (
-    <Container maxWidth="sm">
-      <AuthComponent />
-    </Container>
-  );
+    <ProtectedComponent>
+      <PageBox>
+        
+      </PageBox>
+    </ProtectedComponent>
+  )
 }
 
 export default Index 
