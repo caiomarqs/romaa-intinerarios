@@ -9,7 +9,8 @@ const AuthLoading = () => {
                 height: '100vh',
                 justifyContent: 'center',
                 alignItems: 'center',
-                width: '100%'
+                width: '100%',
+                padding: '1.5rem'
             }}
         >
             <CustomBox

@@ -47,7 +47,8 @@ const AuthComponent = () => {
             <CustomBox sx={{
                 height: '100vh',
                 justifyContent: 'center',
-                alignItems: 'center'
+                alignItems: 'center',
+                padding: '1.5rem'
             }}>
                 <CustomBox
                     maxWidth="sm"
