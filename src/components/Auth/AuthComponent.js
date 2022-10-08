@@ -1,4 +1,4 @@
-import React, { useEffect, useState, use, useCallback } from "react"
+import React, { useEffect, useState } from "react"
 
 import { signIn, useSession } from 'next-auth/react'
 import Router from 'next/router'
@@ -12,7 +12,7 @@ import { CustomSnakcBar } from "../SnackBar"
 
 const AuthComponent = () => {
     const { status } = useSession()
-    
+
     useEffect(() => {
         if (status === "authenticated") {
             Router.replace("/")
@@ -26,10 +26,10 @@ const AuthComponent = () => {
 
     const onKeyDown = async (e) => {
         if (e.keyCode === 13) {
-            return await login(e);
+            return await login(e)
         }
     }
-    
+
     const login = async (e) => {
         e.preventDefault()
 
@@ -69,8 +69,14 @@ const AuthComponent = () => {
                     <RomaLogo style={{
                         margin: '2rem 0 0 0'
                     }} />
-                    <UserNameInput onKeyDown={e => onKeyDown(e)} onChange={(e) => setUsername(e.target.value)} />
-                    <PassInput onKeyDown={e => onKeyDown(e)} onChange={(e) => setPassword(e.target.value)} />
+                    <UserNameInput
+                        onKeyDown={onKeyDown}
+                        onChange={e => setUsername(e.target.value)}
+                    />
+                    <PassInput
+                        onKeyDown={onKeyDown}
+                        onChange={e => setPassword(e.target.value)}
+                    />
                     <ContainedBaseButton
                         sx={{
                             marginTop: '3rem',
