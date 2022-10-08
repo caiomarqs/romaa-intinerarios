@@ -70,10 +70,12 @@ const AuthComponent = () => {
                         margin: '2rem 0 0 0'
                     }} />
                     <UserNameInput
+                        sx={{ margin: '3rem 0 0 0', }}
                         onKeyDown={onKeyDown}
                         onChange={e => setUsername(e.target.value)}
                     />
                     <PassInput
+                        sx={{ margin: '3rem 0 0 0', }}
                         onKeyDown={onKeyDown}
                         onChange={e => setPassword(e.target.value)}
                     />

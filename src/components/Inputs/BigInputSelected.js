@@ -11,23 +11,23 @@ const FormControlStyles = {
         display: 'none'
     },
     '& .MuiSelect-select': {
-        padding: '0.5rem 1.5rem !important',
+        padding: '.25rem .75rem !important',
         minWidth: 'fit-content'
     }
 }
 
 const InputBaseStyles = {
-    fontSize: '2rem',
+    fontSize: '1.5rem',
     color: gray.A200,
     backgroundColor: white.A600,
-    borderRadius: '0.625rem'
+    borderRadius: '.625rem'
 }
 
 const MenuItemStyles = {
-    fontSize: '1.5rem'
+    fontSize: '1rem'
 }
 
-const BigInputSelected = ({ showLabel, labelName, initalValue, value, values, onChange, options, ...props }) => {
+const BigInputSelected = ({ showLabel, labelName, initalValue, value, values, onChange, options, sx,...props }) => {
 
     const [internalValue, setInternalValue] = useState('')
 
@@ -47,7 +47,7 @@ const BigInputSelected = ({ showLabel, labelName, initalValue, value, values, on
                 showLabel && <Typography
                     sx={{
                         margin: '0 1rem 0 0',
-                        fontSize: '1.5rem'
+                        fontSize: '1rem'
                     }}
                 >
                     {labelName}
@@ -55,7 +55,10 @@ const BigInputSelected = ({ showLabel, labelName, initalValue, value, values, on
 
             }
             <FormControl
-                sx={FormControlStyles}
+                sx={{
+                    ...FormControlStyles,
+                    ...sx
+                }}
             >
                 <InputLabel>
                     {labelName}

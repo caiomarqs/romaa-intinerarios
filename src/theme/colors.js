@@ -7,6 +7,7 @@ const colors = {
 
 const black = {
     A000: '#1C1C1C',
+    A100: '#2F3338',
     A200: '#4D4F52',
     A400: '#4e565e'
 }
