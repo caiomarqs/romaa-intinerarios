@@ -17,7 +17,7 @@ const meses = [
     'Dezembro'
 ]
 
-const MounthDrawerHeader = () => {
+const MonthDrawerHeader = () => {
     return (
         <>
             <Box sx={{
@@ -57,4 +57,4 @@ const MounthDrawerHeader = () => {
     )
 }
 
-export { MounthDrawerHeader }
+export { MonthDrawerHeader }

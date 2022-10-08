@@ -10,14 +10,13 @@ import { OutlineBaseInput } from "../../Inputs/OutlineBaseInput"
 const ContainerStyles = {
     width: '8rem',
     display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'end'
+    flexDirection: 'column'
 }
 
 const ButtonsBoxStyles = {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'end',
     marginTop: '0.5rem',
 }
 
@@ -26,6 +25,7 @@ const ItemKilometers = () => {
         <Box sx={ContainerStyles}>
             <OutlineBaseInput
                 label="Quilometragem"
+                name="Quilometragem"
             />
             <Box sx={ButtonsBoxStyles}>
                 <IconButton>

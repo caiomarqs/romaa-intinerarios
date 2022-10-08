@@ -1,12 +1,15 @@
 import * as React from 'react';
-import { MounthDrawer, PageBox } from '../src/components';
+import { MonthDrawer, PageBox } from '../src/components';
 import { ProtectedComponent } from '../src/components/Auth';
+import { setupDayjs } from '../src/utils';
+
+setupDayjs()
 
 const Index = () => {
   return (
     <ProtectedComponent>
       <PageBox>
-        <MounthDrawer />
+        <MonthDrawer />
       </PageBox>
     </ProtectedComponent>
   )
