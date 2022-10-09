@@ -4,15 +4,25 @@ import { SessionProvider } from 'next-auth/react'
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider } from '@emotion/react';
+
+import { unstable_getServerSession } from 'next-auth';
+import authOptions from './api/auth/[...nextauth]'
+
 import {
   theme,
   createEmotionCache
 } from '../src/theme';
+import { ProtectedComponent } from '../src/components';
 
 const clientSideEmotionCache = createEmotionCache();
 
-const MyApp = ({ Component, pageProps }) => {
-
+const MyApp = ({
+  Component,
+  pageProps: {
+    session,
+    ...pageProps
+  }
+}) => {
   return (
     <CacheProvider value={clientSideEmotionCache}>
       <Head>
@@ -20,12 +30,29 @@ const MyApp = ({ Component, pageProps }) => {
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <SessionProvider session={pageProps.session}>
-          <Component {...pageProps} />
+        <SessionProvider session={session}>
+          {Component.auth
+            ?
+            (
+              <ProtectedComponent>
+                <Component {...pageProps} />
+              </ProtectedComponent>
+            )
+            : <Component {...pageProps} />
+          }
         </SessionProvider>
       </ThemeProvider>
     </CacheProvider>
   );
+}
+
+
+export async function getServerSideProps({ req, res }) {
+  return {
+    props: {
+      session: await unstable_getServerSession(req, res, authOptions)
+    }
+  }
 }
 
 export default MyApp

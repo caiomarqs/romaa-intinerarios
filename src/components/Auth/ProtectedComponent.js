@@ -5,12 +5,14 @@ import Router from "next/router"
 import { AuthLoading } from "./AuthLoading"
 
 const ProtectedComponent = (props) => {
+
     const { status } = useSession()
 
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         if (status === "unauthenticated") {
+            setLoading(false)
             Router.replace("/auth/signin")
         }
 
@@ -24,15 +26,9 @@ const ProtectedComponent = (props) => {
 
     }, [status])
 
-    return (
-        <>
-            {
-                loading
-                    ? <AuthLoading/>
-                    : props.children
-            }
-        </>
-    )
+    return loading ? <AuthLoading /> : props.children
 }
 
-export { ProtectedComponent }
+const verifyAuthenticated = (status) => status === "authenticated"
+
+export { ProtectedComponent, verifyAuthenticated }

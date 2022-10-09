@@ -1,18 +1,18 @@
-import * as React from 'react';
-import { MonthDrawer, PageBox } from '../src/components';
-import { ProtectedComponent } from '../src/components/Auth';
-import { setupDayjs } from '../src/utils';
+import * as React from 'react'
+
+import { MonthDrawerContainer, PageBox } from '../src/components'
+import { setupDayjs } from '../src/utils'
 
 setupDayjs()
 
 const Index = () => {
   return (
-    <ProtectedComponent>
-      <PageBox>
-        <MonthDrawer />
-      </PageBox>
-    </ProtectedComponent>
+    <PageBox>
+      <MonthDrawerContainer />
+    </PageBox>
   )
 }
+
+Index.auth = true
 
 export default Index 

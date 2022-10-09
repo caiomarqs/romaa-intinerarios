@@ -9,7 +9,7 @@ import { DayIcon } from './DayIcon'
 import { ItemKilometers } from './ItemKilometers';
 import { DayDescription } from './DayDescription'
 
-const DayItem = ({day, month, year}) => {
+const DayItem = ({day, month, year, kilometers}) => {
     return (
         <Box
             sx={{
@@ -24,7 +24,7 @@ const DayItem = ({day, month, year}) => {
             >
                 <DayIcon day={day} />
                 <DayDescription day={day} month={month} year={year} />
-                <ItemKilometers />
+                <ItemKilometers defaultKilometer={kilometers}/>
             </Box>
             <CustomDivider />
         </Box>

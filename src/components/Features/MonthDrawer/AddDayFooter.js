@@ -10,8 +10,9 @@ import { IconButton } from '@mui/material'
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined'
 
 import { OutlineBaseInput } from '../../Inputs/OutlineBaseInput'
+import { FeatureTitle } from '../../Typos'
 
-const AddDayFooter = () => {
+const AddDayFooter = ({totalKilometers}) => {
 
     const [date, setDate] = useState(dayjs())
 
@@ -21,6 +22,9 @@ const AddDayFooter = () => {
             padding: "3rem 0 0 0",
             display: 'flex'
         }}>
+            <Box sx={{ flex: 1 }}>
+                <FeatureTitle>Total Percorido: {totalKilometers}</FeatureTitle>
+            </Box>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
                     onChange={(e) => {

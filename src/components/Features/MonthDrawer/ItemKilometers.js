@@ -1,5 +1,5 @@
 
-import React from "react"
+import React, { useState } from "react"
 
 import { Box, IconButton } from "@mui/material"
 import SaveAsOutlinedIcon from '@mui/icons-material/SaveAsOutlined'
@@ -20,12 +20,17 @@ const ButtonsBoxStyles = {
     marginTop: '0.5rem',
 }
 
-const ItemKilometers = () => {
+const ItemKilometers = ({ defaultKilometer }) => {
+
+    const [kilometers, setKilometers] = useState(defaultKilometer)
+
     return (
         <Box sx={ContainerStyles}>
             <OutlineBaseInput
                 label="Quilometragem"
                 name="Quilometragem"
+                value={kilometers}
+                onChange={(e) => setKilometers(e.target.value)}
             />
             <Box sx={ButtonsBoxStyles}>
                 <IconButton>

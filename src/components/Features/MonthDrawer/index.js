@@ -1,35 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useSession } from 'next-auth/react'
 
-import { Box} from '@mui/system'
+import { MonthDrawerProvider } from '../../../providers'
 
-import { MonthDrawerHeader } from './MonthDrawerHeader'
-import { DayItem } from './DayItem'
-import { AddDayFooter } from './AddDayFooter'
+import { MonthDrawer } from './MonthDrawer'
 
-const days = [
-    {
-        day: 8,
-        month: "Outubro",
-        year: 2022
-    },
-    {
-        day: 10,
-        month: "Outubro",
-        year: 2022
-    }
-]
+const MonthDrawerContainer = () => {
 
+    const { data, status } = useSession()
 
-const MonthDrawer = () => {
     return (
-        <Box>
-            <MonthDrawerHeader />
+        <MonthDrawerProvider>
             {
-                days.map(day => <DayItem key={day.day} {...day} />)
+                data 
+                && <MonthDrawer user={data.user} />
             }
-            <AddDayFooter />
-        </Box>
+        </MonthDrawerProvider>
     )
 }
 
-export { MonthDrawer }
+export { MonthDrawerContainer }
