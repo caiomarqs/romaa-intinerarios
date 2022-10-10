@@ -7,13 +7,12 @@ import { MonthDrawer } from './MonthDrawer'
 
 const MonthDrawerContainer = () => {
 
-    const { data, status } = useSession()
+    const { data } = useSession()
 
     return (
         <MonthDrawerProvider>
             {
-                data 
-                && <MonthDrawer user={data.user} />
+                data && <MonthDrawer user={data.user} />
             }
         </MonthDrawerProvider>
     )

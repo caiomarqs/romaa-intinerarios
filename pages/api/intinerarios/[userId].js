@@ -1,12 +1,16 @@
 import { verifyData } from "../../../lib/repository"
 import {
     createIntinerario,
-    readAllIntinerariosByUser
+    deleteIntinerario,
+    readAllIntinerariosByUser,
+    updateIntinerario
 } from "../../../lib/services/intinerario"
 
 const defaultMethods = {
     GET: 'GET',
-    POST: 'POST'
+    POST: 'POST',
+    PUT: 'PUT',
+    DELETE: 'DELETE'
 }
 
 const handler = async (req, res) => {
@@ -16,23 +20,44 @@ const handler = async (req, res) => {
     await verifyData("intinerarios");
 
     switch (method) {
-        case defaultMethods.GET:
-            const intinerarios = await readAllIntinerariosByUser(userId)
-            res.status(200).json(intinerarios)
-            break
-        case defaultMethods.POST:
-            const intinerario = await createIntinerario(body, userId)
+        case defaultMethods.GET: {
+            return res.status(200).json(await readAllIntinerariosByUser(userId))
+        }
 
-            if(!intinerario) {
-                res.status(409).end("Intinerario already exists!")
-                break
+        case defaultMethods.POST: {
+            const postIntinerario = await createIntinerario(body, userId)
+
+            if (!postIntinerario) {
+                return res.status(409).end("Intinerario already exists!")
             }
 
-            res.status(200).json(intinerario)
-            break
+            return res.status(200).json(postIntinerario)
+        }
+
+        case defaultMethods.PUT: {
+            const putIntinerario = await updateIntinerario(body, userId)
+
+            if (!putIntinerario) {
+                return res.status(409).end("Intinerario not exists!")
+
+            }
+            return res.status(200).json(putIntinerario)
+        }
+
+        case defaultMethods.DELETE: {
+            const delIntinerario = await deleteIntinerario(body, userId)
+
+            if (!delIntinerario) {
+                return res.status(409).end("Intinerario not exists!")
+
+            }
+
+            return res.status(204).json()
+        }
+
         default:
             res.setHeader('Allow', Object.entries(defaultMethods))
-            res.status(405).end(`Method ${method} Not Allowed`)
+            return res.status(405).end(`Method ${method} Not Allowed`)
     }
 }
 

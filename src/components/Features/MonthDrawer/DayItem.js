@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Box } from '@mui/system'
 
@@ -9,7 +9,7 @@ import { DayIcon } from './DayIcon'
 import { ItemKilometers } from './ItemKilometers';
 import { DayDescription } from './DayDescription'
 
-const DayItem = ({day, month, year, kilometers}) => {
+const DayItem = ({ day }) => {
     return (
         <Box
             sx={{
@@ -22,10 +22,14 @@ const DayItem = ({day, month, year, kilometers}) => {
                     display: 'flex'
                 }}
             >
-                <DayIcon day={day} />
-                <DayDescription day={day} month={month} year={year} />
-                <ItemKilometers defaultKilometer={kilometers}/>
-            </Box>
+                <DayIcon day={day.dia} />
+                <DayDescription
+                    day={day.dia}
+                    month={day.mes}
+                    year={day.ano}
+                />
+                <ItemKilometers day={day}/>
+            </Box> 
             <CustomDivider />
         </Box>
     )
