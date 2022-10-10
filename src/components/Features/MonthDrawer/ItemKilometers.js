@@ -9,11 +9,17 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined'
 import { OutlineBaseInput } from "../../Inputs/OutlineBaseInput"
 import { mutate } from "swr"
 import { api } from "../../../utils"
+import { theme } from "../../../theme"
 
 const ContainerStyles = {
     width: '8rem',
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    [theme.breakpoints.down('sm')]: {
+        width: '100%',
+        paddingTop: '2rem',
+        flexDirection: 'column-reverse'
+    }
 }
 
 const ButtonsBoxStyles = {
@@ -21,6 +27,10 @@ const ButtonsBoxStyles = {
     flexDirection: 'row',
     justifyContent: 'end',
     marginTop: '0.5rem',
+    [theme.breakpoints.down('sm')]: {
+        justifyContent: 'end',
+        marginBottom: '1rem'
+    }
 }
 
 const ItemKilometers = ({ day }) => {

@@ -15,6 +15,7 @@ import { FeatureTitle } from '../../Typos'
 
 import { api } from '../../../utils'
 import { CustomSnakcBar } from '../../SnackBar'
+import { theme } from '../../../theme'
 
 
 const AddDayFooter = ({ totalKilometers }) => {
@@ -49,27 +50,40 @@ const AddDayFooter = ({ totalKilometers }) => {
             <Box sx={{
                 justifyContent: 'end',
                 padding: "3rem 0 0 0",
-                display: 'flex'
+                display: 'flex',
+                [theme.breakpoints.down('sm')]: {
+                    justifyContent: 'start',
+                    flexWrap: 'wrap'
+                }
             }}>
                 <Box sx={{ flex: 1 }}>
                     <FeatureTitle>Total Percorido: {totalKilometers}</FeatureTitle>
                 </Box>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker
-                        onChange={(e) => {
-                            setDate(dayjs(e))
-                        }}
-                        value={date}
-                        minDate={dayjs().startOf("month")}
-                        maxDate={dayjs().endOf("month")}
-                        label="Dia do mês"
-                        inputFormat="DD"
-                        renderInput={(params) => <OutlineBaseInput sx={{ width: 'none' }} name="dia-do-mes" {...params} />}
-                    />
-                </LocalizationProvider>
-                <IconButton onClick={addDay} >
-                    <AddCircleOutlineOutlinedIcon />
-                </IconButton>
+                <Box
+                    sx={{
+                        [theme.breakpoints.down('sm')]: {
+                            marginTop: '1.5rem'
+                        }
+                    }}
+                >
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DatePicker
+                            onChange={(e) => {
+                                setDate(dayjs(e))
+                            }}
+                            value={date}
+                            minDate={dayjs().startOf("month")}
+                            maxDate={dayjs().endOf("month")}
+                            label="Dia do mês"
+                            inputFormat="DD"
+                            renderInput={(params) => <OutlineBaseInput sx={{ width: 'none' }} name="dia-do-mes" {...params} />}
+                        />
+                    </LocalizationProvider>
+                    <IconButton onClick={addDay} >
+                        <AddCircleOutlineOutlinedIcon />
+                    </IconButton>
+                </Box>
+
             </Box>
             <CustomSnakcBar
                 message={error}

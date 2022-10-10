@@ -8,6 +8,7 @@ import { DayIcon } from './DayIcon'
 
 import { ItemKilometers } from './ItemKilometers';
 import { DayDescription } from './DayDescription'
+import { theme } from '../../../theme';
 
 const DayItem = ({ day }) => {
     return (
@@ -19,7 +20,11 @@ const DayItem = ({ day }) => {
             <Box
                 sx={{
                     padding: "1rem",
-                    display: 'flex'
+                    display: 'flex',
+                    [theme.breakpoints.down('sm')]: {
+                        padding: "1rem 0",
+                        flexWrap: 'wrap'
+                    }
                 }}
             >
                 <DayIcon day={day.dia} />
