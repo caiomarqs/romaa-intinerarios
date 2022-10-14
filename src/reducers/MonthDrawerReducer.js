@@ -2,9 +2,16 @@ import { MONTH_DRAWER_ACTIONS } from '../providers'
 
 const MonthDrawerReducer = (state, action) => {
     switch (action.type) {
+        case MONTH_DRAWER_ACTIONS.SET_DRAWER_HEADER:
+            return {
+                ...state,
+                ...action.payload
+            }
         case MONTH_DRAWER_ACTIONS.SET_DAYS:
-            const { days, ...restState } = state
-            return { days: action.payload, ...restState }
+            return {
+                ...state,
+                days: action.payload,
+            }
         case MONTH_DRAWER_ACTIONS.ADD_DAY:
             return { ...state }
         case MONTH_DRAWER_ACTIONS.DELETE_DAY:
@@ -12,9 +19,9 @@ const MonthDrawerReducer = (state, action) => {
         case MONTH_DRAWER_ACTIONS.EDIT_DAY:
             return { ...state }
         case MONTH_DRAWER_ACTIONS.CHANGE_MONTH:
-            return { ...state }
+            return { ...state, month: action.payload }
         case MONTH_DRAWER_ACTIONS.CHANGE_YEAR:
-            return { ...state }
+            return { ...state, year: action.payload }
         default:
             return state
     }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import dayjs from 'dayjs'
 import { mutate } from 'swr'
@@ -16,17 +16,30 @@ import { FeatureTitle } from '../../Typos'
 import { api } from '../../../utils'
 import { CustomSnakcBar } from '../../SnackBar'
 import { theme } from '../../../theme'
+import { MonthDrawerContext } from '../../../providers'
 
 
-const AddDayFooter = ({ totalKilometers }) => {
+const AddDayFooter = () => {
+
+    const { monthDrawerState } = useContext(MonthDrawerContext)
+    const { days, month, year } = monthDrawerState
 
     const [date, setDate] = useState(dayjs())
 
     const { data } = useSession()
     const { user } = data;
 
+    const [totalKilometers, setTotalKilometers] = useState(0)
     const [error, setError] = useState('')
     const [showError, setShowError] = useState(false)
+
+
+    useEffect(() => {
+        if (days?.length > 0) {
+            setTotalKilometers(days.reduce((prev, curr) => prev + curr.km, 0))
+        }
+
+    }, [days, month, year])
 
     const addDay = async () => {
         const addData = await api(`/api/intinerarios/${user.id}`, {
@@ -42,7 +55,7 @@ const AddDayFooter = ({ totalKilometers }) => {
             setShowError(true)
         }
 
-        await mutate(`/api/intinerarios/${user.id}`)
+        await mutate(`/api/intinerarios/${user.id}?month=${month}&year=${year}`)
     }
 
     return (

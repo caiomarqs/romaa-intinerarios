@@ -1,59 +1,76 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import { Box } from '@mui/system'
 
 import { FeatureTitle } from '../../Typos'
 import { BigInputSelected } from '../../Inputs'
 import { CustomDivider } from '../../Customs'
-
-const years = [
-    '2022',
-    '2023'
-]
-
-const meses = [
-    'Outubro',
-    'Novembro',
-    'Dezembro'
-]
+import { MonthDrawerContext, MONTH_DRAWER_ACTIONS } from '../../../providers'
 
 const MonthDrawerHeader = () => {
+
+    const { monthDrawerState, dispatch } = useContext(MonthDrawerContext)
+    const { months, years, month, year } = monthDrawerState
+
+    const changeMonth = (value) => {
+        dispatch({
+            type: MONTH_DRAWER_ACTIONS.CHANGE_MONTH,
+            payload: value
+        })
+    }
+
+    const changeYear = (value) => {
+        dispatch({
+            type: MONTH_DRAWER_ACTIONS.CHANGE_YEAR,
+            payload: value
+        })
+    }
+
+    useEffect(() => {
+        changeMonth(months?.length > 0 ? months[0] : '')
+        changeYear(years?.length > 0  ? years[0] : '')
+    }, [months, years])
+
     return (
-        <>
-            <Box sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'end'
-            }}>
-                <FeatureTitle
-                    sx={{
-                        flex: 1
-                    }}
-                >
-                    Intirarios
-                </FeatureTitle>
-                <Box>
-                    <BigInputSelected
-                        labelName="mes"
-                        initalValue={meses[0]}
-                        onChange={() => { }}
-                        values={meses}
-                        showLabel={false}
+        (
+            (months?.length > 0 && years?.length > 0)
+            &&
+            <>
+                <Box sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'end'
+                }}>
+                    <FeatureTitle
                         sx={{
-                            marginRight: '.5rem'
+                            flex: 1
                         }}
-                    />
-                    <BigInputSelected
-                        labelName="Ano"
-                        initalValue={years[0]}
-                        onChange={() => { }}
-                        values={years}
-                        showLabel={false}
-                    />
+                    >
+                        Intirarios
+                    </FeatureTitle>
+                    <Box>
+                        <BigInputSelected
+                            labelName="mes"
+                            initalValue={month ?? ''}
+                            onChange={val => changeMonth(val)}
+                            values={months}
+                            showLabel={false}
+                            sx={{
+                                marginRight: '.5rem'
+                            }}
+                        />
+                        <BigInputSelected
+                            labelName="Ano"
+                            initalValue={year ?? ''}
+                            onChange={val => changeYear(val)}
+                            values={years}
+                            showLabel={false}
+                        />
+                    </Box>
                 </Box>
-            </Box>
-            <CustomDivider margin={true} />
-        </>
+                <CustomDivider margin={true} />
+            </>
+        )
     )
 }
 

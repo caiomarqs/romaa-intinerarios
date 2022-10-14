@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useSession } from 'next-auth/react'
 
 import { MonthDrawerProvider } from '../../../providers'
@@ -12,7 +12,7 @@ const MonthDrawerContainer = () => {
     return (
         <MonthDrawerProvider>
             {
-                data && <MonthDrawer user={data.user} />
+                data && <MonthDrawer user={data.user}/>
             }
         </MonthDrawerProvider>
     )

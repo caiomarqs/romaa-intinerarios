@@ -46,7 +46,7 @@ const ItemKilometers = ({ day }) => {
             km: kilometers
         }, 'PUT');
 
-        await mutate(`/api/intinerarios/${user.id}`)
+        await mutate(`/api/intinerarios/${user.id}?month=${day.mes}&year=${day.ano}`)
     }
 
     const deleteDay = async () => {
@@ -55,7 +55,7 @@ const ItemKilometers = ({ day }) => {
             km: kilometers
         }, 'DELETE');
 
-        await mutate(`/api/intinerarios/${user.id}`)
+        await mutate(`/api/intinerarios/${user.id}?month=${day.mes}&year=${day.ano}`)
     }
 
     return (
