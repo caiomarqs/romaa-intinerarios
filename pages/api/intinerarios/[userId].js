@@ -1,4 +1,3 @@
-import { verifyData } from "../../../lib/repository"
 import {
     createIntinerario,
     deleteIntinerario,
@@ -16,8 +15,6 @@ const defaultMethods = {
 const handler = async (req, res) => {
     const { body, query, method } = req
     const { userId } = query
-
-    await verifyData("intinerarios");
 
     switch (method) {
         case defaultMethods.GET: {
