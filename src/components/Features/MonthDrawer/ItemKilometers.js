@@ -2,7 +2,7 @@
 import React, { useState } from "react"
 
 import { useSession } from "next-auth/react"
-import { Box, IconButton } from "@mui/material"
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton } from "@mui/material"
 import SaveAsOutlinedIcon from '@mui/icons-material/SaveAsOutlined'
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined'
 
@@ -10,6 +10,7 @@ import { OutlineBaseInput } from "../../Inputs/OutlineBaseInput"
 import { mutate } from "swr"
 import { api } from "../../../utils"
 import { theme } from "../../../theme"
+import { CustomAlertDialog } from "../../Customs"
 
 const ContainerStyles = {
     width: '8rem',
@@ -38,6 +39,7 @@ const ItemKilometers = ({ day }) => {
     const { data } = useSession()
     const { user } = data;
 
+    const [openDeleteDialog, setOpenDeleteDialog] = useState(false)
     const [kilometers, setKilometers] = useState(day.km)
 
     const editDay = async () => {
@@ -54,6 +56,8 @@ const ItemKilometers = ({ day }) => {
             ...day,
             km: kilometers
         }, 'DELETE');
+
+        setOpenDeleteDialog(false)
 
         await mutate(`/api/intinerarios/${user.id}?month=${day.mes}&year=${day.ano}`)
     }
@@ -72,10 +76,22 @@ const ItemKilometers = ({ day }) => {
                 <IconButton onClick={editDay}>
                     <SaveAsOutlinedIcon />
                 </IconButton>
-                <IconButton onClick={deleteDay}>
+                <IconButton onClick={_ => setOpenDeleteDialog(true)}>
                     <DeleteOutlinedIcon />
                 </IconButton>
             </Box>
+            <CustomAlertDialog
+                title="Gostaria de deletar esse dia?"
+                open={openDeleteDialog}
+                onClose={_ => setOpenDeleteDialog(false)}
+                onCancel={_ => setOpenDeleteDialog(false)}
+                onAccept={deleteDay}
+                acceptButtonContent="Deletar"
+                cancelButtonContent="Cancelar"
+            >
+                <p>Você tem certeza que quer deletar esse dia?</p>
+                <p>{`Dia: ${day.dia}, Mes: ${day.mes}, Ano: ${day.ano}`}</p>
+            </CustomAlertDialog>
         </Box>
     )
 }
