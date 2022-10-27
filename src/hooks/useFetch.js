@@ -11,10 +11,10 @@ const fetcher = async (url, data, method) => await fetch(url, {
     body: data ?? null
 }).then(r => r.json())
 
-const useFetch = (route, fetch, data, method) => useSWR(
+const useFetch = (route, cb, data, method) => useSWR(
     route,
-    fetch ?? (url => fetcher(url, data, method)),
+    (url => fetcher(url, data, method).then(data => { cb(data); return data })),
     defaultOptionsSWR
 )
 
-export { useFetch }
+export { useFetch, fetcher }

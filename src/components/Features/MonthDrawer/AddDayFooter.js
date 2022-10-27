@@ -35,10 +35,16 @@ const AddDayFooter = () => {
 
 
     useEffect(() => {
+
+        if(month && year) {
+            const reciveDate = dayjs(`${year}-${month}`, 'YYYY-MMMM')
+            const thisDay = dayjs().get('month') == reciveDate.get('month') ? dayjs().get('date') : '01'
+            setDate(dayjs(`${year}-${month}-${thisDay}`, 'YYYY-MMMM-DD'))
+        }
+
         if (days?.length > 0) {
             setTotalKilometers(days.reduce((prev, curr) => prev + curr.km, 0))
         }
-
     }, [days, month, year])
 
     const addDay = async () => {
@@ -85,8 +91,8 @@ const AddDayFooter = () => {
                                 setDate(dayjs(e))
                             }}
                             value={date}
-                            minDate={dayjs().startOf("month")}
-                            maxDate={dayjs().endOf("month")}
+                            minDate={date.startOf("month")}
+                            maxDate={date.endOf("month")}
                             label="Dia do mês"
                             inputFormat="DD"
                             renderInput={(params) => <OutlineBaseInput sx={{ width: 'none' }} name="dia-do-mes" {...params} />}

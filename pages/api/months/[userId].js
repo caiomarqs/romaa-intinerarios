@@ -6,12 +6,12 @@ const defaultMethods = {
 
 const handler = async (req, res) => {
     const { body, query, method } = req
-    const { userId } = query
+    const { userId, year } = query
 
     switch (method) {
         case defaultMethods.GET: {
             return res.status(200).json(
-                await MonthService.readAllMonthsByUserId(userId)
+                await MonthService.readAllMonthsByUserIdAndYear(userId, year)
             )
         }
 

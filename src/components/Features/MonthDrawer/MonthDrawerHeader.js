@@ -28,7 +28,7 @@ const MonthDrawerHeader = () => {
 
     useEffect(() => {
         changeMonth(months?.length > 0 ? months[0] : '')
-        changeYear(years?.length > 0  ? years[0] : '')
+        changeYear(years?.length > 0 ? years[0] : 0)
     }, [months, years])
 
     return (
@@ -41,11 +41,7 @@ const MonthDrawerHeader = () => {
                     alignItems: 'center',
                     justifyContent: 'end'
                 }}>
-                    <FeatureTitle
-                        sx={{
-                            flex: 1
-                        }}
-                    >
+                    <FeatureTitle sx={{ flex: 1 }}>
                         Intirarios
                     </FeatureTitle>
                     <Box>
