@@ -18,7 +18,7 @@ const DaysList = ({ user }) => {
         })
     })
 
-    useEffect(() => { }, [month, year])
+    useEffect(() => { }, [month, year, days])
 
     return (
         days?.length > 0

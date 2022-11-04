@@ -1,5 +1,5 @@
 
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 
 import { useSession } from "next-auth/react"
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton } from "@mui/material"
@@ -40,7 +40,12 @@ const ItemKilometers = ({ day }) => {
     const { user } = data;
 
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false)
-    const [kilometers, setKilometers] = useState(day.km)
+    const [kilometers, setKilometers] = useState(0)
+
+    useEffect(() => {
+        setKilometers(day.km)
+    }, [day])
+
 
     const editDay = async () => {
         await api(`/api/intinerarios/${user.id}`, {
